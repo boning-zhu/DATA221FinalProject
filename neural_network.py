@@ -2,9 +2,15 @@ import pandas as pd
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, InputLayer
+from sklearn.model_selection import train_test_split
 
 # Load the cleaned dataset into a data frame
 cleaned_diabetes_data = pd.read_csv("cleaned_diabetes.csv")
+
+# Split data into training and testing
+feature_matrix = cleaned_diabetes_data.drop(["Outcome"], axis=1)
+target_class = cleaned_diabetes_data.loc[:, ["Outcome"]]
+features_train, features_test, labels_train, labels_test = train_test_split(feature_matrix, target_class, test_size=.2, random_state=42)
 
 # Set seed so model always returns the same results
 tf.random.set_seed(42)
