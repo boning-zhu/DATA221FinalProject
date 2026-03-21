@@ -14,17 +14,27 @@ features_train, features_test, labels_train, labels_test = train_test_split(feat
 
 # Set seed so model always returns the same results
 tf.random.set_seed(42)
-
-# Set up neural network
 neural_network_model = Sequential()
 
-# Define layers
+# Define input layer
 input_layer = InputLayer(input_shape=(8,)) # 8 input neurons for 8 features
 neural_network_model.add(input_layer)
+
+# Define hidden layer
 hidden_layer = Dense(3)
 neural_network_model.add(hidden_layer)
+
+# Define output layer
 output_layer=Dense(1, activation='sigmoid')
 neural_network_model.add(output_layer)
 
-# Compile the mode
+# Compile the model
 neural_network_model.compile(loss='binary_crossentropy') # Using binary_crossentropy since this is a binary classification problem
+
+# Train the model
+neural_network_model.fit(features_train, labels_train, epochs=10)
+
+# Predict on testing data
+class_probabilities = neural_network_model.predict(features_test)
+print(class_probabilities)
+
