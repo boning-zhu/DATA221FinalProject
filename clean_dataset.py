@@ -14,5 +14,6 @@ imputed_diabetes_df = pd.DataFrame(imputer.fit_transform(df_to_impute), columns=
 
 imputed_diabetes_df["Pregnancies"] = diabetes_df["Pregnancies"]
 imputed_diabetes_df["Outcome"] = diabetes_df["Outcome"]
+print(imputed_diabetes_df)
 
-imputed_diabetes_df.to_csv("cleaned_diabetes.csv")
+imputed_diabetes_df.to_csv("cleaned_diabetes.csv", index=False)
