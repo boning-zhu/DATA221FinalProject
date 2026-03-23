@@ -57,3 +57,25 @@ model = DecisionTreeClassifier(
     min_samples_split=10,
     random_state=42
 )
+
+# optimize decision tree parameters
+model = DecisionTreeClassifier(
+    max_depth=4,
+    min_samples_split=10,
+    random_state=42
+)
+
+# retrain
+model.fit(X_train, y_train)
+
+# predict again
+y_pred = model.predict(X_test)
+
+# evaluation
+from sklearn.metrics import classification_report, accuracy_score
+
+print("Optimized Model Results:")
+print(classification_report(y_test, y_pred))
+
+acc = accuracy_score(y_test, y_pred)
+print("Accuracy:", acc)
