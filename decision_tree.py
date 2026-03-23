@@ -31,3 +31,29 @@ y_pred = model.predict(X_test)
 #add evaluation metrics
 from sklearn.metrics import classification_report
 print(classification_report(y_test, y_pred))
+
+#add confusion matrix
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+cm = confusion_matrix(y_test, y_pred)
+
+sns.heatmap(cm, annot=True, fmt="d")
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.show()
+
+#add feature importance plot
+importance = model.feature_importances_
+
+plt.barh(X.columns, importance)
+plt.title("Feature Importance")
+plt.show()
+
+#optimize decision tree parameters
+model = DecisionTreeClassifier(
+    max_depth=4,
+    min_samples_split=10,
+    random_state=42
+)
