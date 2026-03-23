@@ -23,3 +23,11 @@ X_train, X_test, y_train, y_test = train_test_split(
 from sklearn.tree import DecisionTreeClassifier
 #initialize decision tree model
 model = DecisionTreeClassifier(random_state=42)
+#train decisioin tree model
+model.fit(X_train, y_train)
+#make predictions
+y_pred = model.predict(X_test)
+
+#add evaluation metrics
+from sklearn.metrics import classification_report
+print(classification_report(y_test, y_pred))
