@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
 # Load the cleaned dataset into a data frame
 cleaned_diabetes_data = pd.read_csv("Data/cleaned_diabetes.csv")
 
@@ -13,11 +14,23 @@ y = df["Outcome"]
 # Split the data into 80% training and 20% testing
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Print the shapes of the training and testing sets
-print(X_train.shape)
-print(X_test.shape)
-print(y_train.shape)
-print(y_test.shape)
+# Create a range of k values from 1 to 10
+k_values = range(1, 11)
+
+# Store the accuracy for each k value
+accuracy = []
+
+# Train and test the KNN model for each k value
+for k in k_values:
+    model = KNeighborsClassifier(n_neighbors=k, metric="euclidean")
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    acc = accuracy_score(y_test, y_pred)
+    accuracy.append(acc)
+
+
+    # Print the accuracy for each k
+    print("k =", k, "Accuracy =", acc)
 
 
 
