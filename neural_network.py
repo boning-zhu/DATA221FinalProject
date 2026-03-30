@@ -33,11 +33,10 @@ neural_network_model.add(output_layer)
 neural_network_model.compile(loss='binary_crossentropy', metrics=['accuracy', 'recall', 'precision', 'f1_score']) # Using binary_crossentropy since this is a binary classification problem
 
 # Train the model
-neural_network_model.fit(features_train, labels_train, epochs=10)
+neural_network_model.fit(features_train, labels_train, epochs=15)
 
 # Predict on testing data
 class_probabilities = neural_network_model.predict(features_test)
-print(class_probabilities)
 
 # Evaluate the model
 model_performance = neural_network_model.evaluate(features_test, labels_test)
