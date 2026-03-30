@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
@@ -33,4 +34,16 @@ for k in k_values:
     print("k =", k, "Accuracy =", acc)
 
 
+# Find the best k value
+best_k = list(k_values)[accuracy.index(max(accuracy))]
 
+# Print the best k value and best accuracy
+print("\nBest k:", best_k)
+print("Best Accuracy:", max(accuracy))
+
+# Plot the accuracy for each k value
+plt.plot(list(k_values), accuracy, marker="o")
+plt.xlabel("K")
+plt.ylabel("Accuracy")
+plt.title("Accuracy vs K")
+plt.show()
