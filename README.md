@@ -7,7 +7,7 @@ It contains the original and cleaned datasets and four models.
 
 Ali: Created KNN model
 
-Bonnie: Created decision tree
+Boning: Created decision tree
 
 Chashanpreet: Created logistic regression
 
