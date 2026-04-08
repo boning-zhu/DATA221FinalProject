@@ -22,8 +22,10 @@ input_layer = InputLayer(input_shape=(8,)) # 8 input neurons for 8 features
 neural_network_model.add(input_layer)
 
 # Define hidden layer
-hidden_layer = Dense(4)
+hidden_layer = Dense(6)
 neural_network_model.add(hidden_layer)
+hidden_layer2 = Dense(4)
+neural_network_model.add(hidden_layer2)
 
 # Define output layer
 output_layer=Dense(1, activation='sigmoid')
@@ -33,7 +35,7 @@ neural_network_model.add(output_layer)
 neural_network_model.compile(loss='binary_crossentropy', metrics=['accuracy', 'recall', 'precision', 'f1_score']) # Using binary_crossentropy since this is a binary classification problem
 
 # Train the model
-neural_network_model.fit(features_train, labels_train, epochs=15)
+neural_network_model.fit(features_train, labels_train, epochs=40)
 
 # Predict on testing data
 class_probabilities = neural_network_model.predict(features_test)
