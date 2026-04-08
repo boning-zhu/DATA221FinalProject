@@ -2,10 +2,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import accuracy_score
-# Load the cleaned dataset into a data frame
-cleaned_diabetes_data = pd.read_csv("Data/cleaned_diabetes.csv")
+from sklearn.metrics import accuracy_score, f1_score
 
+# Load the cleaned dataset into a data frame
 df = pd.read_csv("Data/cleaned_diabetes.csv")
 
 # Split the dataset into input features (X) and target values (y)
@@ -29,17 +28,24 @@ for k in k_values:
     acc = accuracy_score(y_test, y_pred)
     accuracy.append(acc)
 
-
     # Print the accuracy for each k
     print("k =", k, "Accuracy =", acc)
-
 
 # Find the best k value
 best_k = list(k_values)[accuracy.index(max(accuracy))]
 
-# Print the best k value and best accuracy
+# Train the final model using the best k value
+best_model = KNeighborsClassifier(n_neighbors=best_k, metric="euclidean")
+best_model.fit(X_train, y_train)
+best_y_pred = best_model.predict(X_test)
+
+# Calculate the final F1 score
+final_f1 = f1_score(y_test, best_y_pred)
+
+# Print the best k value, best accuracy, and F1 score
 print("\nBest k:", best_k)
 print("Best Accuracy:", max(accuracy))
+print("F1 Score:", final_f1)
 
 # Plot the accuracy for each k value
 plt.plot(list(k_values), accuracy, marker="o")
